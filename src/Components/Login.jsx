@@ -2,31 +2,60 @@ import { useContext } from "react";
 import { AuthContext } from "./AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 
 const Login = () => {
+    const {user} = useContext(AuthContext)
         const navigate = useNavigate()
 
     const {signInWithGoogle} = useContext(AuthContext)
 
 
+    const setUserRole = async (user) => {
+        try {
+          const userData = {
+            email: user.email,
+            name: user.displayName || "Anonymous",
+            image: user.photoURL || "",
+            
+          };
+    
+          // Send a request to your server to save the user in MongoDB
+          const res = await axios.post("http://localhost:5000/users", userData);
+          console.log("User role set or verified:", res.data);
+        } catch (error) {
+          console.error("Error setting user role:", error);
+        }
+      };
 
-    const handleGoogleLogin =()=>{
-        signInWithGoogle()
-        .then(result=>{
-            toast.success('login successful' ,{position: "top-center",
-              autoClose: 2000,})
-            navigate(location?.state ? location.state : "/");
-            // navigate('/')
-          })
-          .catch(err=>{
-            // console.log("ERROR",err.message)
-            toast.error(`Login failed: ${err.message}`, {
+
+
+    const handleGoogleLogin =async()=>{
+        try {
+        const result= await signInWithGoogle()
+        await setUserRole(result.user); 
+          console.log(result.user);
+
+          toast.success("Login successful", {
+            position: "top-right",
+            autoClose: 2000,
+          });
+        //   navigate(location?.state ? location.state : "/");
+        navigate('/')
+        }
+        
+        catch (error) {
+            console.error("ERROR:", error.message);
+        
+            toast.error(`Login Failed: ${error.message}`, {
               position: "top-center",
               autoClose: 2000,
-          })
-          })
+            });
+          }
     }
+
+
 
 
 

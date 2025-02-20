@@ -8,7 +8,7 @@ const TaskColumn = ({ title, tasks }) => {
     <div ref={setNodeRef} className="bg-gray-100 p-4 rounded-lg shadow-md w-1/3">
       <h2 className="text-lg font-bold mb-2">{title}</h2>
       {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
+        <TaskCard key={task._id} task={task} />
       ))}
     </div>
   );
