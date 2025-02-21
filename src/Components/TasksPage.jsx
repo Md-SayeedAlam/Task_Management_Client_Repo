@@ -16,7 +16,7 @@ const TasksPage = () => {
     queryFn: async () => {
       const res = await axios.get("http://localhost:5000/tasks");
       // const res = await axios.get(`http://localhost:5000/tasks/${user?.email}`);
-      console.log(res.data)
+      // console.log(res.data)
       return res.data;
     },
   });
@@ -50,7 +50,7 @@ const TasksPage = () => {
       <SortableContext items={tasks.map((task) => task._id)} strategy={verticalListSortingStrategy}>
         <div className="flex flex-col md:flex-row gap-4 p-4">
           {["To-Do", "In Progress", "Done"].map((category) => (
-            <TaskColumn key={category} title={category} tasks={tasks.filter((t) => t.category === category)} />
+            <TaskColumn key={category} title={category} refetch={refetch} tasks={tasks.filter((t) => t.category === category)} />
           ))}
         </div>
       </SortableContext>

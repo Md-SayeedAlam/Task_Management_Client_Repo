@@ -10,11 +10,10 @@ import AuthProvider from "./Components/AuthProvider/AuthProvider";
 import Login from "./Components/Login";
 import TasksPage from "./Components/TasksPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import {
-  QueryClient,
-  QueryClientProvider,
-  
-} from "@tanstack/react-query";
+import UpdateTask from './Components/UpdateTask';
+
+import { QueryClient,QueryClientProvider} from "@tanstack/react-query";
+import AddTask from './Components/AddTask';
 
 const queryClient = new QueryClient();
 
@@ -38,6 +37,14 @@ const router = createBrowserRouter([
       {
         path:'/taskPage',
         element:<PrivateRoute><TasksPage></TasksPage></PrivateRoute>,
+      },
+      {
+        path:'/updateTask/:id',
+        element:<PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>,
+      },
+      {
+        path:'/addTask',
+        element:<PrivateRoute><AddTask></AddTask></PrivateRoute>,
       },
 
     ],

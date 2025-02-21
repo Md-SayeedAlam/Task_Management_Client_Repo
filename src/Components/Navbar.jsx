@@ -13,11 +13,14 @@ const Navbar = () => {
     <>
       {" "}
       <li>
-        <a>Item 1</a>
+        <Link to='/addTask'>Add Task</Link>
       </li>
       <li>
-        <Link to='/taskPage'>Item 3</Link>
+        <Link to='/taskPage'>Tasks</Link>
       </li>
+      {/* <li>
+        <Link to='/updateTask'>Update Task</Link>
+      </li> */}
     </>
   );
 
