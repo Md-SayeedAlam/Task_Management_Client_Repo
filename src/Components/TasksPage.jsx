@@ -7,43 +7,61 @@ import axios from "axios";
 import { AuthContext } from "./AuthProvider/AuthProvider";
 
 const TasksPage = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
 
-  // Fetching tasks using React Query
+  // Fetch tasks using React Query
   const { data, refetch } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
       const res = await axios.get("http://localhost:5000/tasks");
-      // const res = await axios.get(`http://localhost:5000/tasks/${user?.email}`);
-      // console.log(res.data)
       return res.data;
     },
   });
 
-  // Update tasks when data changes
   useEffect(() => {
     if (data) setTasks(data);
   }, [data]);
 
-  const handleDragEnd = (event) => {
+ 
+
+ 
+  
+  
+
+  const handleDragEnd = async (event) => {
     const { active, over } = event;
-    if (!over) return;
+    if (!over) return; // যদি ড্রপ না হয়, কিছু করা হবে না
 
-    setTasks((prev) => {
-      const updatedTasks = [...prev];
-      const oldIndex = prev.findIndex((task) => task.id === active.id);
-      const newIndex = prev.findIndex((task) => task.id === over.id);
+    const draggedTaskId = active.id; // যেটা ড্র্যাগ করা হয়েছে
+    const newCategory = over.id; // যেখান থেকে ড্রপ করা হয়েছে (নতুন ক্যাটাগরি)
 
-      if (oldIndex === -1 || newIndex === -1) return prev;
+    console.log("Dragged Task ID:", draggedTaskId);
+    console.log("New Category:", newCategory);
 
-      const [movedTask] = updatedTasks.splice(oldIndex, 1);
-      movedTask.category = updatedTasks[newIndex]?.category || movedTask.category;
-      updatedTasks.splice(newIndex, 0, movedTask);
+    // **Step 1: লোকাল স্টেটে ক্যাটাগরি আপডেট করা**
+    setTasks((prev) =>
+        prev.map((task) =>
+            task._id === draggedTaskId ? { ...task, category: newCategory } : task
+        )
+    );
 
-      return updatedTasks;
-    });
-  };
+    
+    // **Step 2: ডাটাবেজে ক্যাটাগরি আপডেট করা**
+    try {
+        const res = await axios.put(`http://localhost:5000/tasks/category/${draggedTaskId}`, {
+            category: newCategory, // ✅ সঠিকভাবে ক্যাটাগরি আপডেট হচ্ছে
+        });
+
+        if (res.data.modifiedCount > 0) {
+            console.log("Task category updated successfully!");
+            refetch(); // ✅ সার্ভার থেকে নতুন ডাটা ফেচ করুন
+        }
+    } catch (error) {
+        console.error("Error updating task category:", error);
+    }
+};
+
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

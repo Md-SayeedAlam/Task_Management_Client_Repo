@@ -42,34 +42,39 @@ const TaskCard = ({ task ,refetch }) => {
     });
   };
 
+  const getDueDateColor = (dueDate) => {
+    const currentDate = new Date();
+    const dueDateObj = new Date(dueDate);
+    const diffTime = dueDateObj - currentDate;
 
-//   const handleUpdate =async (e,task) =>{
-//      e.preventDefault()
+    if (diffTime < 0) {
+      return "bg-red-600"; // Overdue tasks in red
+    } else if (diffTime < 24 * 60 * 60 * 1000) {
+      return "bg-yellow-500"; // Due within a day in yellow
+    } else {
+      return "bg-green-500"; // On time in green
+    }
+  };
 
-//      try {
-//       await axios.patch(`/cart/update-quantity/${task._id}`, { quantity: newQuantity });
-//       refetch(); 
-//       toast.success('Quantity Updated Successfully.')
-//     } catch (error) {
-//       console.error("Error updating quantity:", error);
-//     }
-
-// }
+ 
 
 
 
   return (
-    <div className="flex justify-center items-center gap-5">
+    <div className="flex justify-center items-center gap-5  ">
       <div
       ref={setNodeRef}
       {...listeners}
       {...attributes}
       style={style}
-      className="bg-white p-3 rounded-lg shadow-md mb-2 cursor-grab"
+      className="bg-white p-3 rounded-lg shadow-md mb-2 cursor-grab "
     >
       <h3 className="font-semibold">{task.title}</h3>
       <p className="text-sm text-gray-600">{task.description}</p>
       <p className="text-sm text-gray-600">{task.Timestamp}</p>
+      <div className={`p-2 text-white rounded ${getDueDateColor(task.dueDate)}`}>
+          {`Due: ${new Date(task.dueDate).toLocaleDateString()}`}
+        </div>
     </div>
     <div>
       <button onClick={()=>handleDelete(task)} className="text-red-600 btn text-xl"><GoTrash /></button>

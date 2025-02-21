@@ -23,6 +23,7 @@ const AddTask = () => {
       title: data.name,
       description: data.description,
       Timestamp: data.date,
+      dueDate:new Date(),
       category: "To-Do",
       addedBy:user?.email,
     };
