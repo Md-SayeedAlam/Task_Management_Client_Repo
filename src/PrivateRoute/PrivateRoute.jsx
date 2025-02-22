@@ -18,14 +18,14 @@ const PrivateRoute = ({children}) => {
 
   
     // Show loading animation while checking authentication
-    // if (loading) {
-    //   return (
-    //     <div className="flex justify-center items-center min-h-screen">
-    //       <Lottie animationData={lottieLoading} />
-    //       <h2 className="text-green-600 font-bold text-5xl">Loading...</h2>
-    //     </div>
-    //   );
-    // }
+    if (loading) {
+      return (
+        <div className="flex justify-center items-center min-h-screen">
+          <Lottie animationData={lottieLoading} />
+          <h2 className="text-green-600 font-bold text-5xl">Loading...</h2>
+        </div>
+      );
+    }
   
    
   

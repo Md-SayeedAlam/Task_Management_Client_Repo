@@ -18,17 +18,21 @@ const AddTask = () => {
 
   const onSubmit = (data) => {
     // console.log(data);
-    
+    // const dueDates = new Date(data.date).getTime() - new Date().getTime();
+    const dueDates = new Date(data.date).getTime()
+
     const taskInfo = {
       title: data.name,
       description: data.description,
-      Timestamp: data.date,
-      dueDate:new Date(),
+      // Timestamp: data.date,
+      Timestamp: new Date().toLocaleDateString(),
+      
+      dueDate : dueDates,
       category: "To-Do",
       addedBy:user?.email,
     };
 
-    axios.post('http://localhost:5000/tasks', taskInfo)
+    axios.post('https://task-management-application-server-theta.vercel.app/tasks', taskInfo)
       .then(res => {
         // console.log(res.data);
         
@@ -79,7 +83,7 @@ const AddTask = () => {
 
           {/* Date Input */}
           <div className="space-y-2">
-            <label className="block text-gray-700 font-medium">Date</label>
+            <label className="block text-gray-700 font-medium">Due Date</label>
             <input
               {...register("date", { required: true })}
               defaultValue={new Date().toISOString().split("T")[0]}

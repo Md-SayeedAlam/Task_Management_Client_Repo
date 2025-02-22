@@ -1,8 +1,9 @@
 
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "./AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import '../Components/NavbarCss/Navbar.css'
 
 const Navbar = () => {
   const {user,signOutUser} = useContext(AuthContext)
@@ -13,14 +14,15 @@ const Navbar = () => {
     <>
       {" "}
       <li>
-        <Link to='/addTask'>Add Task</Link>
+        <NavLink to='/'>Home</NavLink>
       </li>
       <li>
-        <Link to='/taskPage'>Tasks</Link>
+        <NavLink to='/addTask'>Add Task</NavLink>
       </li>
-      {/* <li>
-        <Link to='/updateTask'>Update Task</Link>
-      </li> */}
+      <li>
+        <NavLink to='/taskPage'>Tasks</NavLink>
+      </li>
+      
     </>
   );
 

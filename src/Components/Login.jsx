@@ -22,7 +22,7 @@ const Login = () => {
           };
     
           // Send a request to your server to save the user in MongoDB
-          const res = await axios.post("http://localhost:5000/users", userData);
+          const res = await axios.post("https://task-management-application-server-theta.vercel.app/users", userData);
           console.log("User role set or verified:", res.data);
         } catch (error) {
           console.error("Error setting user role:", error);

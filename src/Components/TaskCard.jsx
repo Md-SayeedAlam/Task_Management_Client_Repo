@@ -28,7 +28,7 @@ const TaskCard = ({ task ,refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/tasks/${task._id}`).then((res) => {
+        axios.delete(`https://task-management-application-server-theta.vercel.app/tasks/${task._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
@@ -43,9 +43,12 @@ const TaskCard = ({ task ,refetch }) => {
   };
 
   const getDueDateColor = (dueDate) => {
-    const currentDate = new Date();
-    const dueDateObj = new Date(dueDate);
-    const diffTime = dueDateObj - currentDate;
+    // const currentDate = new Date();
+    // const dueDateObj = new Date(dueDate);
+    // const diffTime = dueDateObj - currentDate;
+
+    const currentDate = new Date().getTime(); 
+    const diffTime = dueDate - currentDate; 
 
     if (diffTime < 0) {
       return "bg-red-600"; // Overdue tasks in red
@@ -73,7 +76,8 @@ const TaskCard = ({ task ,refetch }) => {
       <p className="text-sm text-gray-600">{task.description}</p>
       <p className="text-sm text-gray-600">{task.Timestamp}</p>
       <div className={`p-2 text-white rounded ${getDueDateColor(task.dueDate)}`}>
-          {`Due: ${new Date(task.dueDate).toLocaleDateString()}`}
+      {`Due: ${new Date(task.dueDate).toLocaleDateString()}`}
+
         </div>
     </div>
     <div>

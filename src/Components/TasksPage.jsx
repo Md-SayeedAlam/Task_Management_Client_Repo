@@ -14,7 +14,7 @@ const TasksPage = () => {
   const { data, refetch } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/tasks");
+      const res = await axios.get("https://task-management-application-server-theta.vercel.app/tasks");
       return res.data;
     },
   });
@@ -49,7 +49,7 @@ const TasksPage = () => {
     
     // **Step 2: ডাটাবেজে ক্যাটাগরি আপডেট করা**
     try {
-        const res = await axios.put(`http://localhost:5000/tasks/category/${draggedTaskId}`, {
+        const res = await axios.put(`https://task-management-application-server-theta.vercel.app/tasks/category/${draggedTaskId}`, {
             category: newCategory, // ✅ সঠিকভাবে ক্যাটাগরি আপডেট হচ্ছে
         });
 

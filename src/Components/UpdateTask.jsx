@@ -20,7 +20,7 @@ const UpdateTask = () => {
     const { data: tasks = [], refetch } = useQuery({
         queryKey: ["task", params.id],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/tasks/${params.id}`);
+            const res = await axios.get(`https://task-management-application-server-theta.vercel.app/tasks/${params.id}`);
             
             return res.data;
             
@@ -56,7 +56,7 @@ const UpdateTask = () => {
             category: data.category,
         };
 
-        axios.put(`http://localhost:5000/tasks/${params.id}`, updatedTask)
+        axios.put(`https://task-management-application-server-theta.vercel.app/tasks/${params.id}`, updatedTask)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     refetch();
