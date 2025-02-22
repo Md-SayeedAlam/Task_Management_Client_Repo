@@ -73,15 +73,15 @@ const UpdateTask = () => {
     };
 
     return (
-        <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4">
-            <div className="bg-white w-full max-w-lg shadow-lg rounded-2xl p-8 border border-gray-200">
-                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        <div className="min-h-screen flex justify-center items-center  px-4">
+            <div className=" w-full max-w-lg shadow-lg rounded-2xl p-8 border border-gray-200">
+                <h2 className="text-3xl font-bold text-center  mb-6">
                     Update Task
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                     {/* Title Input */}
                     <div className="space-y-2">
-                        <label className="block text-gray-700 font-medium">Title</label>
+                        <label className="block  font-medium">Title</label>
                         <input
                             {...register("name", { required: "Title is required" })}
                             type="text"
@@ -94,7 +94,7 @@ const UpdateTask = () => {
 
                     {/* Description Input */}
                     <div className="space-y-2">
-                        <label className="block text-gray-700 font-medium">Description</label>
+                        <label className="block  font-medium">Description</label>
                         <textarea
                             {...register("description", { required: "Description is required" })}
                             placeholder="Enter Task Description"
@@ -105,7 +105,7 @@ const UpdateTask = () => {
 
                     {/* Category Input */}
                     <div className="space-y-2">
-                        <label className="block text-gray-700 font-medium">Category</label>
+                        <label className="block  font-medium">Category</label>
                         <select
                             {...register("category", { required: "Category is required" })}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -119,7 +119,7 @@ const UpdateTask = () => {
 
                     {/* Date Input */}
                     <div className="space-y-2">
-                        <label className="block text-gray-700 font-medium">Date</label>
+                        <label className="block font-medium">Date</label>
                         <input
                             {...register("date", { required: "Date is required" })}
                             type="date"

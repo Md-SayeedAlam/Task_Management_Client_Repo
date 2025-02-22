@@ -52,15 +52,15 @@ const AddTask = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4">
-      <div className="bg-white w-full max-w-lg shadow-lg rounded-2xl p-8 border border-gray-200">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="min-h-screen flex justify-center items-center  px-4">
+      <div className=" w-full max-w-lg shadow-lg rounded-2xl p-8 border border-gray-200">
+        <h2 className="text-3xl font-bold text-center  mb-6">
           Add A Task
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Title Input */}
           <div className="space-y-2">
-            <label className="block text-gray-700 font-medium">Title</label>
+            <label className="block  font-medium">Title</label>
             <input
               {...register("name", { required: true })}
               type="text"
@@ -72,7 +72,7 @@ const AddTask = () => {
 
           {/* Description Input */}
           <div className="space-y-2">
-            <label className="block text-gray-700 font-medium">Description</label>
+            <label className="block  font-medium">Description</label>
             <textarea
               {...register("description", { required: true })}
               placeholder="Enter Task Description"
@@ -83,7 +83,7 @@ const AddTask = () => {
 
           {/* Date Input */}
           <div className="space-y-2">
-            <label className="block text-gray-700 font-medium">Due Date</label>
+            <label className="block  font-medium">Due Date</label>
             <input
               {...register("date", { required: true })}
               defaultValue={new Date().toISOString().split("T")[0]}

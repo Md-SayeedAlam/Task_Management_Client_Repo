@@ -72,7 +72,7 @@ const TaskCard = ({ task ,refetch }) => {
       style={style}
       className="bg-white p-3 rounded-lg shadow-md mb-2 cursor-grab "
     >
-      <h3 className="font-semibold">{task.title}</h3>
+      <h3 className="font-semibold text-gray-600">{task.title}</h3>
       <p className="text-sm text-gray-600">{task.description}</p>
       <p className="text-sm text-gray-600">{task.Timestamp}</p>
       <div className={`p-2 text-white rounded ${getDueDateColor(task.dueDate)}`}>
@@ -80,7 +80,7 @@ const TaskCard = ({ task ,refetch }) => {
 
         </div>
     </div>
-    <div>
+    <div className="space-x-1">
       <button onClick={()=>handleDelete(task)} className="text-red-600 btn text-xl"><GoTrash /></button>
 
       <Link to={`/updateTask/${task._id}`} ><button  className="text-red-600 btn text-xl"><CiEdit /></button></Link>

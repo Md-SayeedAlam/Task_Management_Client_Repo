@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "./AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import '../Components/NavbarCss/Navbar.css'
+import Theme from "./Theme";
 
 const Navbar = () => {
   const {user,signOutUser} = useContext(AuthContext)
@@ -41,6 +42,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
+      
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -75,6 +77,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+      <Theme></Theme>
         {
           user? <><Link ><button onClick={handleSignOut} className="btn">LogOut</button></Link></>  : <><Link to='/login'><button className="btn">Login</button></Link></>
         }
