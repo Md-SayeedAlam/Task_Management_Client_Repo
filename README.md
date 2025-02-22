@@ -1,7 +1,7 @@
 # Project Name is : Task Management
 ![ Task Management Banner](./public/taskmanagement.png)
 
-
+A simple and interactive task management application built with MERN Stack. Users can add, update, delete, and reorder tasks using drag & drop. Features include: Private Routes for authentication 🔒 Due Date Indicators (Overdue in red, upcoming in yellow, on-time in green) 📅 Activity Log to track task movements 📜 Real-time Updates with React Que
 
 
 ## 2 Key Features :
